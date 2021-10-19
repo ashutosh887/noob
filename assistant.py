@@ -21,10 +21,10 @@ def speak(audio):
 # Greet Function
 def greet():
     hour = int(datetime.datetime.now().hour)
-    if hour>=0 and hour<12:
+    if hour >= 0 and hour < 12:
         speak("Good Morning!")
 
-    elif hour>12 and hour<6:
+    elif hour > 12 and hour < 6:
         speak("Good Afternoon!")
 
     else:
@@ -39,7 +39,7 @@ def takeCommand():
     with sr.Microphone() as source:
         print("Listening...")
         r.pause_threshold = 1
-        audio= r.listen(source)
+        audio = r.listen(source)
 
     try:
         print("Recognizing...")
@@ -51,6 +51,7 @@ def takeCommand():
         print("Say that again Please")
         return "None"
     return query
+
 
 def sendEmail(to, content):
     server = smtplib.SMTP("smtp.gmail.com", 587)
@@ -81,15 +82,16 @@ if __name__ == "__main__":
 
         elif 'open google' in query:
             webbrowser.open("google.com")
-        
+
         elif 'open instagram' in query:
             webbrowser.open("instagram.com")
 
         elif 'play music' in query:
             songsFolder = "A:\\Songs"
             songs = os.listdir(songsFolder)
-            print(songs)
-            os.startfile(os.path.join(songsFolder, songs[0]))
+            # Functionality to play Random Music
+            r = int(random.randint(0, len(songs)))
+            os.startfile(os.path.join(songsFolder, songs[r]))
 
         elif 'the time' in query:
             time = datetime.datetime.now().strftime("%H:%M:%S")
